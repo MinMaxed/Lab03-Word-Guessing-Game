@@ -119,7 +119,7 @@ namespace Lab03WordGuessingGame
             File.Delete(path);
         }
 
-        static string[] GetWords()
+        static string[] WordBank()
         {
             string[] words;
             words = File.ReadAllLines(path);
@@ -127,14 +127,14 @@ namespace Lab03WordGuessingGame
         }
 
 
-        //initiate the game
+        //initiate the game. uses Random to choose a word from the bank, then displays " _ " for each letter. 
         static void Play()
         {
             Random random = new Random();
-            int randomWord = random.Next(0, GetWords().Length);
+            int randomWord = random.Next(0, WordBank().Length);
 
             string guesses = "";
-            string gameWord = GetWords()[randomWord];
+            string gameWord = WordBank()[randomWord];
             string[] display = new string[gameWord.Length];
 
             for (int i = 0; i < display.Length; i++)
@@ -153,6 +153,8 @@ namespace Lab03WordGuessingGame
             string userGuess = Console.ReadLine();
             userGuess = userGuess.ToLower();
 
+            //supposed to be what checks the users' choice vs the game word and then replace the " _ ", but think 
+            //I need to refactor. 
             for (int i = 0; i < gameWord.Length; i++)
             {
                 if (userGuess == gameWord[i])
@@ -182,7 +184,7 @@ namespace Lab03WordGuessingGame
             switch (choice)
             {
                 case 1:
-                    foreach (string word in GetWords())
+                    foreach (string word in WordBank()) 
                     {
                         ReadWords();
                     }
@@ -198,6 +200,7 @@ namespace Lab03WordGuessingGame
                     break;
 
                 case 4:
+                    GameMenu();
                     break;
 
             }
